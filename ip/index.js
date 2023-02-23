@@ -151,20 +151,22 @@ const cardYapici = (ip, bayrakUrl, ulke, ulkeKodu, enlem, boylam, sehir, saat, p
 
 const cardListele = () => {
 	const cardContainer = document.querySelector(".cards");
+	// let myIp = "https://apis.ergineer.com/ipgeoapi/" + benimIP; 
 	axios
+		// .get(myIp)
 		.get("https://apis.ergineer.com/ipgeoapi/46.196.81.16")
-		.then((data) => {
+		.then((res) => {
 			const cardBilgi = cardYapici(
-				data["sorgu"],
-				data["ülkebayrağı"],
-				data["ülke"],
-				data["ülkeKodu"],
-				data["enlem"],
-				data["boylam"],
-				data["şehir"],
-				data["saatdilimi"],
-				data["parabirimi"],
-				data["isp"]);
+				res.data["sorgu"],
+				res.data["ülkebayrağı"],
+				res.data["ülke"],
+				res.data["ülkeKodu"],
+				res.data["enlem"],
+				res.data["boylam"],
+				res.data["şehir"],
+				res.data["saatdilimi"],
+				res.data["parabirimi"],
+				res.data["isp"]);
 
 			cardContainer.append(cardBilgi);
 		})
@@ -173,6 +175,6 @@ const cardListele = () => {
 		})
 }
 cardListele();
-
+// ipAdresimiAl();
 
 
