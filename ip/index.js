@@ -149,32 +149,50 @@ const cardYapici = (ip, bayrakUrl, ulke, ulkeKodu, enlem, boylam, sehir, saat, p
 	return card;
 }
 
+// ipAdresimiAl();
+
+//  !!!!  yukarıdaki fonksiyonu iceride calıştıramadım. içiçe 2 axios .get olarak kendim yazdım.    !!!!
+// console.log(benimIP);
+
 const cardListele = () => {
 	const cardContainer = document.querySelector(".cards");
-	// let myIp = "https://apis.ergineer.com/ipgeoapi/" + benimIP; 
-	axios
-		// .get(myIp)
-		.get("https://apis.ergineer.com/ipgeoapi/46.196.81.16")
-		.then((res) => {
-			const cardBilgi = cardYapici(
-				res.data["sorgu"],
-				res.data["ülkebayrağı"],
-				res.data["ülke"],
-				res.data["ülkeKodu"],
-				res.data["enlem"],
-				res.data["boylam"],
-				res.data["şehir"],
-				res.data["saatdilimi"],
-				res.data["parabirimi"],
-				res.data["isp"]);
 
-			cardContainer.append(cardBilgi);
-		})
-		.catch(err=>{
-			console.log("error",err);
+	// let myIp = "https://apis.ergineer.com/ipgeoapi/" + benimIP; 
+
+	// axios
+			// .get(myIp)
+			// .get(`https://apis.ergineer.com/ipgeoapi/${benimIP}`) 
+
+			// calısmadı
+
+	axios 
+	.get("https://apis.ergineer.com/ipadresim")
+	.then ((res)=>{
+		 const ipAdresi = res.data ;
+		 console.log(ipAdresi);
+		axios
+			.get(`https://apis.ergineer.com/ipgeoapi/${ipAdresi}`)
+			.then((res) => {
+				const cardBilgi = cardYapici(
+					res.data["sorgu"],
+					res.data["ülkebayrağı"],
+					res.data["ülke"],
+					res.data["ülkeKodu"],
+					res.data["enlem"],
+					res.data["boylam"],
+					res.data["şehir"],
+					res.data["saatdilimi"],
+					res.data["parabirimi"],
+					res.data["isp"]);
+
+				cardContainer.append(cardBilgi);
+			})
+			.catch(err=>{
+				console.log("error",err);
+			})
 		})
 }
 cardListele();
-// ipAdresimiAl();
+
 
 
